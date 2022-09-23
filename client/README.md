@@ -1,3 +1,3 @@
-1. Push to github
-2. Clean up To React App
+1. Push to github --Done
+2. Clean up To React App --Done
 3. Create Backend App
