@@ -1,0 +1,60 @@
+.main {
+  width: 250px;
+  height: calc(100vh - 56px);
+  background: #212529;
+  transition: 0.5s ease;
+  transform: translate(-200px);
+  position: absolute;
+  color: white;
+  padding: 1rem;
+  overflow: scroll;
+}
+.main::-webkit-scrollbar {
+  width: 5px;
+}
+.main::-webkit-scrollbar-thumb {
+  width: 5px;
+  background: #0d6efd;
+}
+.main::-webkit-scrollbar-track {
+  background-color: #f6f6f6;
+}
+.personal-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.person-image {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 20px;
+  background: #fff;
+  object-fit: contain;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+.person-image img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  padding: 5px;
+}
+.sidebar-items ul {
+  padding: 0 0.5rem;
+}
+.sidebar-items ul li {
+  list-style: none;
+  width: 100%;
+  background: none;
+  padding: 0.5rem 1rem;
+  margin: 5px 0;
+  border-radius: 5px;
+}
+.sidebar-items ul li.active {
+  background: #0d6efd;
+  padding: 0.5rem 1rem;
+  margin: 5px 0;
+  border-radius: 5px;
+}
