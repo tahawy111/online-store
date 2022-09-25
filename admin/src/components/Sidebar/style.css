@@ -3,11 +3,11 @@
   height: calc(100vh - 56px);
   background: #212529;
   transition: 0.5s ease;
-  transform: translate(-200px);
+  transform: translateX(0px);
   position: absolute;
   color: white;
   padding: 1rem;
-  overflow: scroll;
+  overflow: auto;
 }
 .main::-webkit-scrollbar {
   width: 5px;
@@ -24,6 +24,7 @@
   flex-direction: column;
   align-items: center;
 }
+
 .person-image {
   width: 50px;
   height: 50px;
@@ -35,6 +36,7 @@
   justify-content: center;
   border-radius: 50%;
 }
+
 .person-image img {
   width: 50px;
   height: 50px;

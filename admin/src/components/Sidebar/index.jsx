@@ -1,16 +1,9 @@
-import { useSelector } from "react-redux";
-import personImg from "../../images/person.png";
 import "./style.css";
+import personImg from "../../images/person.png";
 
 const Sidebar = () => {
-  const { menuOpenState } = useSelector((state) => state.main);
   return (
-    <div
-      className="main"
-      style={{
-        transform: menuOpenState ? `translateX(0)` : `translateX(-250px)`,
-      }}
-    >
+    <div className="main">
       <div className="personal-info">
         <div className="person-image">
           <img src={personImg} alt="" className="rounded" />
@@ -20,37 +13,9 @@ const Sidebar = () => {
       <hr />
       <div className="sidebar-items">
         <ul>
-          <li className="active">Link</li>
-          <li>Link</li>
-          <li>Link</li>
-          <li>Link</li>
-          <li>Link</li>
-          <li>Link</li>
-          <li>Link</li>
-          <li>Link</li>
-          <li>Link</li>
-          <li>Link</li>
-          <li>Link</li>
-          <li>Link</li>
-          <li>Link</li>
-          <li>Link</li>
-          <li>Link</li>
-          <li>Link</li>
-          <li>Link</li>
-          <li>Link</li>
-          <li>Link</li>
-          <li>Link</li>
-          <li>Link</li>
-          <li>Link</li>
-          <li>Link</li>
-          <li>Link</li>
-          <li>Link</li>
-          <li>Link</li>
-          <li>Link</li>
-          <li>Link</li>
-          <li>Link</li>
-          <li>Link</li>
-          <li>Link</li>
+          <li className="active">Home</li>
+          <li>Products</li>
+          <li>Categories</li>
         </ul>
       </div>
     </div>

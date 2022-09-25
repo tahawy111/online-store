@@ -1,22 +1,13 @@
-import { Button, Navbar, Nav, Container } from "react-bootstrap";
-import { AiOutlineMenu } from "react-icons/ai";
-import { useDispatch } from "react-redux";
-import { menuOpenState } from "../../slices/mainSlice";
+import { Button } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
 
 function Header() {
-  const dispatch = useDispatch();
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
-        <div className="d-flex align-items-center justify-content-between">
-          <AiOutlineMenu
-            color="white"
-            className="me-1"
-            size={30}
-            onClick={() => dispatch(menuOpenState())}
-          />
-          <Navbar.Brand href="#home">Online Store Dashboard</Navbar.Brand>
-        </div>
+        <Navbar.Brand href="#home">Tahawy Dashboard</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ms-auto">
