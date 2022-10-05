@@ -1,1 +1,1 @@
-1. create users api
+1. create activation api

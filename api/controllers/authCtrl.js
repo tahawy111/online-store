@@ -1,7 +1,7 @@
 import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 import nodemailer from "nodemailer";
-import jwt from "jsonwebtoken";
+import jwt, { decode } from "jsonwebtoken";
 const validEmail = (email) => {
   const re =
     /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
@@ -28,8 +28,6 @@ export const register = async (req, res) => {
   const token = jwt.sign({ name, email, password }, process.env.SENDMAIL_PASS, {
     expiresIn: "15m",
   });
-
-  console.log(token);
 
   // Email Send
   const transport = nodemailer.createTransport({
@@ -65,4 +63,29 @@ export const register = async (req, res) => {
   //     const savedUser = await newUser.save();
   //     return res.status(201).json({ user: savedUser });
   //   } catch (error) {}
+};
+
+export const activation = (req, res) => {
+  jwt.verify(req.body.token, process.env.SENDMAIL_PASS, async (err, decode) => {
+    if (err) {
+      return res
+        .status(401)
+        .json({ message: "Link is expired. Please register again" });
+    }
+    const { name, email, password } = decode;
+    console.log(name, email, password);
+
+    const hashedPassword = bcrypt.hashSync(password, 10);
+
+    const newUser = new User({ name, email, password: hashedPassword });
+
+    try {
+      const savedUser = await newUser.save();
+      return res.status(201).json({ user: savedUser });
+    } catch (error) {
+      return res
+        .status(400)
+        .json({ message: "Error occured activation. Please try again" });
+    }
+  });
 };
