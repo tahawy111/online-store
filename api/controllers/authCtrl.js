@@ -99,7 +99,7 @@ export const login = async (req, res) => {
     return res.status(404).json({ message: "User not found" });
   }
 
-  if (!bcrypt.compareSync(password, user.password) === true) {
+  if (!bcrypt.compareSync(password, user.password)) {
     return res.status(401).json({ message: "Passwords do not matches" });
   }
 
