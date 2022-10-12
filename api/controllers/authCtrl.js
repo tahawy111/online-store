@@ -100,7 +100,7 @@ export const login = async (req, res) => {
   }
 
   if (!bcrypt.compareSync(password, user.password)) {
-    return res.status(401).json({ message: "Passwords do not matches" });
+    return res.status(401).json({ message: "Wrong Password" });
   }
 
   const token = jwt.sign(

@@ -1,17 +1,23 @@
 import { Box, Button, TextField } from "@mui/material";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { login } from "../../actions/user.actions";
 import "./style.css";
 
 const SigninScreen = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { isAuth } = useSelector((state) => state.user);
   const [formData, setFormData] = useState({ email: "", password: "" });
   const handleChange = ({ target }) =>
     setFormData({ ...formData, [target.name]: target.value });
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(login({ ...formData }));
+    if (isAuth) {
+      navigate("/");
+    }
   };
   return (
     <div className="bg">
@@ -23,7 +29,6 @@ const SigninScreen = () => {
             border: "1px solid grey",
             borderRadius: "15px",
           }}
-          noValidate
           autoComplete="off"
         >
           <h4 className="mt-5 text-center">Signin To Admin Dashboard</h4>
@@ -38,6 +43,7 @@ const SigninScreen = () => {
             <br />
             <TextField
               className="mt-3"
+              type="password"
               label="Password"
               name="password"
               variant="outlined"
