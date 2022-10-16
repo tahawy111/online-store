@@ -1,11 +1,22 @@
+import { useEffect } from "react";
 import "./App.css";
 import SigninScreen from "./screens/SigninScreen";
 import HomeScreen from "./screens/HomeScreen";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useJwt } from "react-jwt";
+import { logout } from "./slices/userSlice";
+import { jwtVerify } from "./actions/user.actions";
 
 function App() {
-  const { isAuth } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const { isAuth, userData } = useSelector((state) => state.user);
+  const { isExpired } = useJwt(userData !== null ? userData.token : true);
+  useEffect(() => {
+    if (isAuth && isExpired) {
+      dispatch(logout());
+    }
+  }, [isExpired]);
   return (
     <div className="App" style={{ background: "#f4f4f8", height: "100vh" }}>
       <Routes>

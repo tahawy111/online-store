@@ -107,7 +107,7 @@ export const login = async (req, res) => {
     { _id: user._id, name: user.name, email: user.email, role: user.role },
     process.env.TOKEN_PASS,
     {
-      expiresIn: "30d",
+      expiresIn: "1m",
     }
   );
 

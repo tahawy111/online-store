@@ -15,3 +15,7 @@ export const loginAction = (userData) => {
     }
   };
 };
+
+export const jwtVerify = (token) => {
+  return async (dispatch) => {};
+};
