@@ -1,6 +1,7 @@
 import { Box, Button, TextField } from "@mui/material";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+<<<<<<< HEAD
 import { useNavigate } from "react-router-dom";
 import { login } from "../../actions/user.actions";
 import "./style.css";
@@ -19,6 +20,21 @@ const SigninScreen = () => {
       navigate("/");
     }
   };
+=======
+import { loginAction } from "../../actions/user.actions";
+import "./style.css";
+const SigninScreen = () => {
+  const dispatch = useDispatch();
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const handleChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(loginAction(formData));
+  };
+
+>>>>>>> frontend
   return (
     <div className="bg">
       <div className="center-full">
@@ -31,11 +47,19 @@ const SigninScreen = () => {
           }}
           autoComplete="off"
         >
+<<<<<<< HEAD
           <h4 className="mt-5 text-center">Signin To Admin Dashboard</h4>
+=======
+          <h4 className="text-center mt-5">Signin To Admin Panel</h4>
+>>>>>>> frontend
           <div style={{ padding: "4rem" }}>
             <TextField
               label="Email"
               name="email"
+<<<<<<< HEAD
+=======
+              type="email"
+>>>>>>> frontend
               variant="outlined"
               value={formData.email}
               onChange={handleChange}
