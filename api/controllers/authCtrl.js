@@ -65,6 +65,51 @@ export const register = async (req, res) => {
   //   } catch (error) {}
 };
 
+export const adminRegister = async (req, res) => {
+  const { name, email, password, creatorId } = req.body;
+
+  const adminAccount = await User.findById(creatorId);
+
+  if (adminAccount.role !== "admin") {
+    return res
+      .status(403)
+      .json({ message: "Only admin can create customer service account" });
+  }
+
+  const user = await User.findOne({ email });
+  if (user) {
+    return res.status(403).json({ message: "User is already exist" });
+  }
+
+  if (!validEmail(email)) {
+    return res.status(403).json({ message: "Invalid email" });
+  }
+
+  if (password.length < 6) {
+    return res
+      .status(403)
+      .json({ message: "Password must be at least 6 characters" });
+  }
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  const newUser = new User({
+    name,
+    email,
+    password: hashedPassword,
+    role: "cs",
+  });
+
+  try {
+    const savedUser = await newUser.save();
+    return res.status(201).json({ user: savedUser });
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ message: "Error occured register. Please try again" });
+  }
+};
+
 export const activation = (req, res) => {
   jwt.verify(req.body.token, process.env.SENDMAIL_PASS, async (err, decode) => {
     if (err) {
@@ -94,6 +139,44 @@ export const login = async (req, res) => {
   const { email, password } = req.body;
 
   const user = await User.findOne({ email });
+
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
+
+  if (!bcrypt.compareSync(password, user.password)) {
+    return res.status(401).json({ message: "Passwords do not matches" });
+  }
+
+  const token = jwt.sign(
+    { _id: user._id, name: user.name, email: user.email, role: user.role },
+    process.env.TOKEN_PASS,
+    {
+      expiresIn: "1m",
+    }
+  );
+
+  return res.status(200).json({
+    user: {
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+    },
+    token,
+  });
+};
+
+export const adminLogin = async (req, res) => {
+  const { email, password } = req.body;
+
+  const user = await User.findOne({ email });
+
+  if (user.role !== "admin" && user.role !== "cs") {
+    return res
+      .status(403)
+      .json({ message: "Only admin or customer sevice accounts can signin" });
+  }
 
   if (!user) {
     return res.status(404).json({ message: "User not found" });

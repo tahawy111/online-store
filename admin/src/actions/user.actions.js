@@ -6,7 +6,7 @@ export const loginAction = (userData) => {
   return async (dispatch) => {
     dispatch(loginReqeust());
     try {
-      const res = await axiosIntance.post("/auth/login", userData);
+      const res = await axiosIntance.post("/auth/admin/login", userData);
       localStorage.setItem("userData", JSON.stringify(res.data));
       dispatch(loginSuccess(res.data));
     } catch (error) {
