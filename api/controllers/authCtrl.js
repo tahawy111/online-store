@@ -1,7 +1,7 @@
 import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 import nodemailer from "nodemailer";
-import jwt, { decode } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 const validEmail = (email) => {
   const re =
     /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
@@ -152,7 +152,7 @@ export const login = async (req, res) => {
     { _id: user._id, name: user.name, email: user.email, role: user.role },
     process.env.TOKEN_PASS,
     {
-      expiresIn: "1m",
+      expiresIn: "30d",
     }
   );
 
@@ -190,7 +190,7 @@ export const adminLogin = async (req, res) => {
     { _id: user._id, name: user.name, email: user.email, role: user.role },
     process.env.TOKEN_PASS,
     {
-      expiresIn: "1m",
+      expiresIn: "30d",
     }
   );
 
@@ -203,4 +203,19 @@ export const adminLogin = async (req, res) => {
     },
     token,
   });
+};
+
+export const requireSignin = (req, res, next) => {
+  if (!req.headers.authorization)
+    return res.status(404).json({ message: "Token Not Found. Please Login" });
+  const token = req.headers.authorization.split(" ")[1];
+  jwt.verify(token, process.env.TOKEN_PASS, (error, decode) => {
+    if (error) {
+      return res
+        .status(404)
+        .json({ message: "Token Is Expired. Please Login" });
+    }
+    req.user = decode;
+  });
+  next();
 };
