@@ -219,3 +219,39 @@ export const requireSignin = (req, res, next) => {
   });
   next();
 };
+
+export const adminAndCsMiddleware = (req, res, next) => {
+  if (req.user.role !== "admin" && req.user.role !== "cs") {
+    return res.status(403).json({
+      message: "Only admin or customer service can apply this request",
+    });
+  }
+  next();
+};
+
+export const csMiddleware = (req, res, next) => {
+  if (req.user.role !== "admin") {
+    return res.status(403).json({
+      message: "Only customer service can apply this request",
+    });
+  }
+  next();
+};
+
+export const adminMiddleware = (req, res, next) => {
+  if (req.user.role !== "admin") {
+    return res.status(403).json({
+      message: "Only admin service can apply this request",
+    });
+  }
+  next();
+};
+
+export const userMiddleware = (req, res, next) => {
+  if (req.user.role !== "user") {
+    return res.status(403).json({
+      message: "Only user can apply this request",
+    });
+  }
+  next();
+};
