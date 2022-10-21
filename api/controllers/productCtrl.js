@@ -1,3 +1,3 @@
 export const create = (req, res) => {
-  res.json("create");
+  console.log(req.files);
 };
