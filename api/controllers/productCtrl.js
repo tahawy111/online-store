@@ -1,8 +1,10 @@
+import Product from "../models/Product.js";
+
 export const create = async (req, res) => {
   const { name, description, price, quantity, category, createdBy } = req.body;
-  console.log({ name, description, price, quantity, category, createdBy });
   let productPictures = [];
-  if (req.files.length > 0) {
+  console.log(req.files);
+  if (req.files.length > 1) {
     productPictures = req.files.map((file) => {
       return { img: file.filename };
     });
@@ -12,7 +14,6 @@ export const create = async (req, res) => {
 
   const newProduct = new Product({
     name,
-    slug: slugify(name),
     price,
     description,
     productPictures,
