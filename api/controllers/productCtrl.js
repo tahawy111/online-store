@@ -1,7 +1,7 @@
 import Product from "../models/Product.js";
 
 export const create = async (req, res) => {
-  const { name, description, price, quantity, category, createdBy } = req.body;
+  const { name, description, price, quantity, category } = req.body;
   let productPictures = [];
   console.log(req.files);
   if (req.files.length > 1) {
