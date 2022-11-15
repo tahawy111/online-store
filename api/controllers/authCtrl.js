@@ -152,7 +152,7 @@ export const login = async (req, res) => {
     { _id: user._id, name: user.name, email: user.email, role: user.role },
     process.env.TOKEN_PASS,
     {
-      expiresIn: "1m",
+      expiresIn: "30d",
     }
   );
 
@@ -190,7 +190,7 @@ export const adminLogin = async (req, res) => {
     { _id: user._id, name: user.name, email: user.email, role: user.role },
     process.env.TOKEN_PASS,
     {
-      expiresIn: "1m",
+      expiresIn: "30d",
     }
   );
 
@@ -203,4 +203,53 @@ export const adminLogin = async (req, res) => {
     },
     token,
   });
+};
+
+export const requireSignin = (req, res, next) => {
+  if (!req.headers.authorization)
+    return res.status(404).json({ message: "Token not found. Please Signin!" });
+  const token = req.headers.authorization.split(" ")[1];
+  jwt.verify(token, process.env.TOKEN_PASS, (error, decode) => {
+    if (error) {
+      res.status(401).json({ message: "Token is expired. Please Signin!" });
+    }
+    req.user = decode;
+    next();
+  });
+};
+
+export const adminAndCsMiddleware = (req, res, next) => {
+  if (req.user.role !== "admin" && req.user.role !== "cs") {
+    return res.status(403).json({
+      message: "Only admin or customer service can apply this request",
+    });
+  }
+  next();
+};
+
+export const csMiddleware = (req, res, next) => {
+  if (req.user.role !== "cs") {
+    return res.status(403).json({
+      message: "Only customer service can apply this request",
+    });
+  }
+  next();
+};
+
+export const adminMiddleware = (req, res, next) => {
+  if (req.user.role !== "admin") {
+    return res.status(403).json({
+      message: "Only admin service can apply this request",
+    });
+  }
+  next();
+};
+
+export const userMiddleware = (req, res, next) => {
+  if (req.user.role !== "user") {
+    return res.status(403).json({
+      message: "Only user can apply this request",
+    });
+  }
+  next();
 };
