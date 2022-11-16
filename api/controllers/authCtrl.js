@@ -172,14 +172,14 @@ export const adminLogin = async (req, res) => {
 
   const user = await User.findOne({ email });
 
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
+
   if (user.role !== "admin" && user.role !== "cs") {
     return res
       .status(403)
       .json({ message: "Only admin or customer sevice accounts can signin" });
-  }
-
-  if (!user) {
-    return res.status(404).json({ message: "User not found" });
   }
 
   if (!bcrypt.compareSync(password, user.password)) {
