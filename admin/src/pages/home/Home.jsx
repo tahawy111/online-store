@@ -1,8 +1,9 @@
 import "./home.scss";
+import Sidebar from "./../../components/sidebar/Sidebar";
 const Home = () => {
   return (
     <div className="home">
-      <div className="title">Home</div>
+      <Sidebar />
     </div>
   );
 };
