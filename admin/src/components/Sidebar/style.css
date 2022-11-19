@@ -4,7 +4,6 @@
   background: #212529;
   transition: 0.5s ease;
   transform: translateX(0px);
-  position: absolute;
   color: white;
   padding: 1rem;
   overflow: auto;
@@ -48,15 +47,14 @@
 }
 .sidebar-items ul li {
   list-style: none;
-  width: 100%;
-  background: none;
-  padding: 0.5rem 1rem;
-  margin: 5px 0;
-  border-radius: 5px;
+  padding: 5px;
 }
-.sidebar-items ul li.active {
+.sidebar-items ul li a {
+  text-decoration: none;
+  color: white;
+}
+.sidebar-items ul li a.active {
+  width: 100%;
   background: #0d6efd;
-  padding: 0.5rem 1rem;
-  margin: 5px 0;
-  border-radius: 5px;
+  padding: 5px 15px;
 }

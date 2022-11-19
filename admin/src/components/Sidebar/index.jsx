@@ -1,6 +1,7 @@
 import "./style.css";
 import personImg from "../../images/person.png";
 import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   const { name } = useSelector((state) => state.user.userData.user);
@@ -15,9 +16,21 @@ const Sidebar = () => {
       <hr />
       <div className="sidebar-items">
         <ul>
-          <li className="active">Home</li>
-          <li>Products</li>
-          <li>Categories</li>
+          <li>
+            <NavLink to="/" end>
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/product" end>
+              Products
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/category" end>
+              Categories
+            </NavLink>
+          </li>
         </ul>
       </div>
     </div>

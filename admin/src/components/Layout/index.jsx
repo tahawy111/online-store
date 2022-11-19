@@ -2,11 +2,14 @@ import React from "react";
 import Header from "../Header";
 import Sidebar from "../Sidebar";
 
-const Layout = () => {
+const Layout = (props) => {
   return (
     <div>
       <Header />
-      <Sidebar />
+      <div className="d-flex">
+        <Sidebar />
+        <div>{props.children}</div>
+      </div>
     </div>
   );
 };

@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import "./App.css";
 import SigninScreen from "./screens/SigninScreen";
 import HomeScreen from "./screens/HomeScreen";
+import ProductScreen from "./screens/ProductScreen";
+import CategoryScreen from "./screens/CategoryScreen";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useJwt } from "react-jwt";
@@ -23,6 +25,14 @@ function App() {
         <Route
           path="/"
           element={isAuth ? <HomeScreen /> : <Navigate to="/signin" />}
+        />
+        <Route
+          path="/product"
+          element={isAuth ? <ProductScreen /> : <Navigate to="/signin" />}
+        />
+        <Route
+          path="/category"
+          element={isAuth ? <CategoryScreen /> : <Navigate to="/signin" />}
         />
         <Route
           path="/signin"
