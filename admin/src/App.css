@@ -4,3 +4,9 @@
   align-items: center;
   min-height: 100vh;
 }
+.css-16ac5r2-MuiButtonBase-root-MuiListItemButton-root.Mui-selected {
+  background: #0d6efd !important;
+}
+.css-1pqm26d-MuiAvatar-img {
+  margin: 5px;
+}

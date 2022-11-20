@@ -51,10 +51,24 @@
 }
 .sidebar-items ul li a {
   text-decoration: none;
-  color: white;
+  color: rgba(255, 255, 255, 0.342);
+  padding: 10px 20px;
+  margin: 15px 0;
+  font-size: larger;
+}
+.sidebar-items ul li a.active::before {
+  content: "";
+  left: 0;
+  transform: translateY(-2px);
+  width: 10px;
+  height: 30px;
+  border-radius: 0 7px 7px 0;
+  background: #0d6efd;
+  position: absolute;
 }
 .sidebar-items ul li a.active {
-  width: 100%;
-  background: #0d6efd;
-  padding: 5px 15px;
+  height: 100%;
+  border-radius: 7px;
+  color: #0d6efd;
+  font-weight: bold;
 }
