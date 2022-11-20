@@ -9,11 +9,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { useJwt } from "react-jwt";
 import { logout } from "./slices/userSlice";
 import { jwtVerify } from "./actions/user.actions";
+import { getCategory } from "./actions/category.cations";
 
 function App() {
   const dispatch = useDispatch();
   const { isAuth, userData } = useSelector((state) => state.user);
   const { isExpired } = useJwt(userData !== null ? userData.token : true);
+  useEffect(() => {
+    dispatch(getCategory());
+  });
   useEffect(() => {
     if (isAuth && isExpired) {
       dispatch(logout());

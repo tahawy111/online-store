@@ -12,7 +12,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
     <BrowserRouter>
-      <ToastContainer autoClose={10000} limit={1} />
+      <ToastContainer autoClose={10000} limit={1} theme="dark" />
       <App />
     </BrowserRouter>
   </Provider>
