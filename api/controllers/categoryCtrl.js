@@ -25,8 +25,6 @@ export const create = async (req, res) => {
 
   const categoryObj = { name, createdBy: req.user._id };
 
-  console.log(categoryObj);
-
   if (parentId) categoryObj.parentId = parentId;
 
   const findCategory = await Category.findOne({ name });
