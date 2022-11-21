@@ -1,5 +1,6 @@
 import Category from "../models/Category.js";
 
+// Category Arrange Function
 function createCategories(categories, parentId = null) {
   let category;
   const categoryList = [];
