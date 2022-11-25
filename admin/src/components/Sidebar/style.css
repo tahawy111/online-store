@@ -49,12 +49,16 @@
   list-style: none;
   padding: 5px;
 }
+.sidebar-items ul li:hover {
+  background: rgba(13, 110, 253, 0.1);
+  border-radius: 7px;
+}
 .sidebar-items ul li a {
   text-decoration: none;
-  color: rgba(255, 255, 255, 0.342);
-  padding: 10px 20px;
+  color: rgba(255, 255, 255, 0.739);
   margin: 15px 0;
   font-size: larger;
+  transition: 0.3s ease-in-out;
 }
 .sidebar-items ul li a.active::before {
   content: "";

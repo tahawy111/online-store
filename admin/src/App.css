@@ -10,3 +10,7 @@
 .css-1pqm26d-MuiAvatar-img {
   margin: 5px;
 }
+.css-1ws8119-MuiDivider-root::before,
+.css-1ws8119-MuiDivider-root::after {
+  border-top: thin solid rgb(255 255 255) !important;
+}
