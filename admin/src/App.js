@@ -8,7 +8,6 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useJwt } from "react-jwt";
 import { logout } from "./slices/userSlice";
-import { jwtVerify } from "./actions/user.actions";
 import { getCategory } from "./actions/category.cations";
 
 function App() {

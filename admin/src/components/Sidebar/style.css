@@ -43,16 +43,14 @@
   padding: 5px;
 }
 .sidebar-items ul {
-  padding: 0 0.5rem;
+  padding: 0 !important;
 }
 .sidebar-items ul li {
   list-style: none;
   padding: 5px;
+  font-size: 1.2rem;
 }
-.sidebar-items ul li:hover {
-  background: rgba(13, 110, 253, 0.1);
-  border-radius: 7px;
-}
+
 .sidebar-items ul li a {
   text-decoration: none;
   color: rgba(255, 255, 255, 0.739);
@@ -70,9 +68,22 @@
   background: #0d6efd;
   position: absolute;
 }
+
 .sidebar-items ul li a.active {
   height: 100%;
   border-radius: 7px;
   color: #0d6efd;
   font-weight: bold;
+}
+.sidebar-items ul li:has(> a.active) {
+  background: rgba(13, 110, 253, 0.1);
+  border-radius: 7px;
+}
+.logout-btn {
+  transition: 0.1s ease-out;
+}
+.logout-btn:hover {
+  transform: scale(1.1);
+  color: #dc3545;
+  line-height: 1.1;
 }
