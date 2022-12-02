@@ -32,11 +32,11 @@ export const register = async (req, res) => {
   // Email Send
   const transport = nodemailer.createTransport({
     service: "gmail",
-    auth: { user: "amer.vib582@gmail.com", pass: "mwigegzkbjjmgpmc" },
+    auth: { user: process.env.MAIL_USER, pass: "mwigegzkbjjmgpmc" },
   });
 
   const mailOptions = {
-    from: process.env.MAIL_USER,
+    from: `'TAHAWY STORE' <${process.env.MAIL_USER}>`,
     to: email,
     subject: "TAHAWY ONLINE STORE ACTIVATION LINK",
     html: `
